@@ -72,5 +72,3 @@ Würde .idea/workspace.xml löschen
 Würde build/ löschen
 Würde res/ löschen
 Würde src/test/ löschen
-!/.gitignore
-/.gitignore
