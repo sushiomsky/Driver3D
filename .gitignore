@@ -6,7 +6,7 @@
 # User-specific stuff:
 .idea
 
-.idea/
+.idea/*
 ## File-based project format:
 *.iws
 
@@ -53,3 +53,6 @@ hs_err_pid*
 Würde .gradle/ löschen
 Würde .idea/workspace.xml löschen
 Würde src/ löschen
+Würde build/ löschen
+Würde res/ löschen
+Würde src/test/ löschen
