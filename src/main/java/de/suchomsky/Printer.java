@@ -2,9 +2,10 @@ package de.suchomsky;
 
 import com.fazecast.jSerialComm.SerialPort;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 /**
  * Driver3D
@@ -30,17 +31,31 @@ public abstract class Printer {
 		this.serialPort = serialPort;
 	}
 
-	public void print(Path localFile) throws IOException {
-		Files.newBufferedReader(localFile);
-	}
+	protected void sendCommand(String command){}
+
+	public void startPrint(){}
 
 	String[] listSdFiles() {
 		String[] gcodeFiles = null;
 		return gcodeFiles;
 	}
 
-	public void transferToSd(Path gcodeFile) {
-
+	public void transferToSd(File localeFile) throws IOException {
+		//get filename
+		//send M28 filename command
+		sendCommand("M28 " + localeFile.getName());
+		BufferedReader bufferedReader = new BufferedReader(new FileReader(localeFile));
+		String line = null;
+		try {
+			while (!(line = bufferedReader.readLine()).isEmpty()){
+				sendCommand(line);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		finally {
+			sendCommand("M29 ");
+		}
 	}
 
 	void printFromSd(String filename) {

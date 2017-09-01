@@ -1,8 +1,10 @@
 package de.suchomsky;
 
 import com.fazecast.jSerialComm.SerialPort;
+import com.fazecast.jSerialComm.SerialPortEvent;
+import com.fazecast.jSerialComm.SerialPortPacketListener;
 
-import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Driver3D
@@ -30,7 +32,7 @@ public class Driver3D {
 		//start print
 
 		SerialPort[] comPorts = SerialPort.getCommPorts();
-
+/*
 		for(SerialPort comPort: comPorts) {
 			System.out.println(comPort.getDescriptivePortName() + " " + comPort.getSystemPortName());
 			comPort.openPort();
@@ -45,7 +47,7 @@ public class Driver3D {
 			}
 			comPort.closePort();
 		}
-/*
+*/
 		while (true) {
 			comPorts = SerialPort.getCommPorts();
 			for (SerialPort comPort : comPorts) {
