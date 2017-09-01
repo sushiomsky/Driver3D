@@ -30,12 +30,12 @@ public abstract class Printer {
 		this.serialPort = serialPort;
 	}
 
-	public void print(Path filePath) throws IOException {
-		Files.newBufferedReader(filePath);
+	public void print(Path localFile) throws IOException {
+		Files.newBufferedReader(localFile);
 	}
 
-	GcodeFile[] listSdFiles() {
-		GcodeFile[] gcodeFiles = null;
+	String[] listSdFiles() {
+		String[] gcodeFiles = null;
 		return gcodeFiles;
 	}
 
