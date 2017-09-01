@@ -17,5 +17,19 @@ package de.suchomsky;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class SerialConnectiion implements PrinterConnection {
+public class SerialConnection implements PrinterConnection {
+	@Override
+	public boolean isConnected() {
+		return false;
+	}
+
+	@Override
+	public boolean connect() {
+		return false;
+	}
+
+	@Override
+	public void send(PrinterCommand printerCommand) {
+
+	}
 }

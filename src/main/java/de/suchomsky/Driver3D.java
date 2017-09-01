@@ -18,7 +18,15 @@ package de.suchomsky;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 public class Driver3D {
+	public static void main(String[] args){
+		if (args.length != 2)
+			System.out.println("Usage: driver3d filename.gco /dev/ttyAMC*");
+		
+		//probe serial port
+		//get printer frmware version
+		//if known start file transfer
+		//
+	}
 
-	
 }
 
