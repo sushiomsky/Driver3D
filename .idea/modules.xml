@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Driver3D.iml" filepath="$PROJECT_DIR$/.idea/modules/Driver3D.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Driver3D_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Driver3D_main.iml" group="Driver3D" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Driver3D_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Driver3D_test.iml" group="Driver3D" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/driver3d.iml" filepath="$PROJECT_DIR$/.idea/modules/driver3d.iml" />
     </modules>
   </component>
 </project>
