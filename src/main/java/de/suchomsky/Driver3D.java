@@ -1,8 +1,8 @@
 package de.suchomsky;
 
 import com.fazecast.jSerialComm.SerialPort;
-import com.fazecast.jSerialComm.SerialPortEvent;
-import com.fazecast.jSerialComm.SerialPortPacketListener;
+
+import java.io.InputStream;
 
 /**
  * Driver3D
@@ -30,11 +30,11 @@ public class Driver3D {
 		//start print
 
 		SerialPort[] comPorts = SerialPort.getCommPorts();
-		/*
+
 		for(SerialPort comPort: comPorts) {
 			System.out.println(comPort.getDescriptivePortName() + " " + comPort.getSystemPortName());
 			comPort.openPort();
-			comPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 100, 100);
+			comPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 20, 0);
 			InputStream in = comPort.getInputStream();
 			try {
 				for (int j = 0; j < 1000; ++j)
@@ -45,7 +45,7 @@ public class Driver3D {
 			}
 			comPort.closePort();
 		}
-		*/
+/*
 		while (true) {
 			comPorts = SerialPort.getCommPorts();
 			for (SerialPort comPort : comPorts) {
@@ -68,9 +68,14 @@ public class Driver3D {
 							SerialPort serialPort = event.getSerialPort();
 							int bytesAvailable = serialPort.bytesAvailable();
 
-							if (bytesAvailable > 0) {
-								byte[] byteBuffer = new byte[bytesAvailable];
-								serialPort.readBytes(byteBuffer, bytesAvailable);
+							if (serialPort.bytesAvailable() > 0) {
+								byte[] byteBuffer = new byte[serialPort.bytesAvailable()];
+								serialPort.readBytes(byteBuffer, byteBuffer.length);
+								try {
+									System.out.println(new String(byteBuffer,"UTF-8"));
+								} catch (UnsupportedEncodingException e) {
+									e.printStackTrace();
+								}
 							}
 							if (event.getEventType() == SerialPort.LISTENING_EVENT_DATA_RECEIVED) {
 							}
