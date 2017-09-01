@@ -1,9 +1,8 @@
-package de.suchomsky.gcode.gcode;
+package de.suchomsky.gcode;
 
-import de.suchomsky.gcode.gcode.movement.G0_RapidLinearMove;
-import de.suchomsky.gcode.gcode.movement.G1_LinearMove;
-import de.suchomsky.gcode.gcode.movement.G4_Dwell;
-import de.suchomsky.gcode.gcode.reserved.UnknownGCode;
+import de.suchomsky.gcode.gcodes.G0_RapidLinearMove;
+import de.suchomsky.gcode.gcodes.G1_LinearMove;
+import de.suchomsky.gcode.reserved.UnknownGCode;
 
 /**
  * Java-Gcode
@@ -13,7 +12,6 @@ public enum GCodeType {
 
 	G0("G0", "Rapid Linear Move", G0_RapidLinearMove.class),
 	G1("G1", "Linear Move", G1_LinearMove.class),
-	G4("G4", "Dwell", G4_Dwell.class),
 
 	GENERIC("", "Unknown gcode", UnknownGCode.class);
 

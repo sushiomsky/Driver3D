@@ -1,4 +1,4 @@
-package de.suchomsky.gcode.gcode;
+package de.suchomsky.gcode;
 
 /**
  * Java-GCode - gcode

@@ -1,7 +1,7 @@
-package de.suchomsky.gcode.gcode.reserved;
+package de.suchomsky.gcode.reserved;
 
-import de.suchomsky.gcode.gcode.GCode;
-import de.suchomsky.gcode.gcode.InvalidGCodeException;
+import de.suchomsky.gcode.GCode;
+import de.suchomsky.gcode.InvalidGCodeException;
 
 /**
  * Java-Gcode

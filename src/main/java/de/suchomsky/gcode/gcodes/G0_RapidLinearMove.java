@@ -1,6 +1,6 @@
-package de.suchomsky.gcode.gcode.movement;
+package de.suchomsky.gcode.gcodes;
 
-import gcode.GCode;
+import de.suchomsky.gcode.GCode;
 
 /**
  * Java-Gcode
