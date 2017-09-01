@@ -25,7 +25,7 @@ public class Driver3D {
 
 	public static void main(String[] args) {
 		//get SerialPorts
-		//Test each if we get a M115 version response
+		//de.suchomsky.Test each if we get a M115 version response
 		//transfer local file to SD card
 		//start print
 
