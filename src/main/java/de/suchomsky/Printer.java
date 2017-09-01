@@ -2,6 +2,10 @@ package de.suchomsky;
 
 import com.fazecast.jSerialComm.SerialPort;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 /**
  * Driver3D
  * Copyright (c) 2017 Dennis Suchomsky <dennis.suchomsky@gmail.com>
@@ -19,29 +23,27 @@ import com.fazecast.jSerialComm.SerialPort;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class Driver3D {
+public abstract class Printer {
+	private SerialPort serialPort;
 
-	private static Driver3D driver3D = null;
-	private SerialPort[] serialPorts = null;
-
-	private Driver3D() {
-		driver3D = this;
-		probePorts();
+	Printer(SerialPort serialPort) {
+		this.serialPort = serialPort;
 	}
 
-	public static Driver3D getInstance() {
-		if (driver3D == null)
-			driver3D = new Driver3D();
-		return driver3D;
+	public void print(Path filePath) throws IOException {
+		Files.newBufferedReader(filePath);
 	}
 
-	public SerialPort[] getSerialPorts() {
-		return serialPorts;
+	GcodeFile[] listSdFiles() {
+		GcodeFile[] gcodeFiles = null;
+		return gcodeFiles;
 	}
 
-	private void probePorts() {
-		serialPorts = SerialPort.getCommPorts();
+	public void transferToSd(Path gcodeFile) {
+
 	}
-	
+
+	void printFromSd(String filename) {
+
+	}
 }
-

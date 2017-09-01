@@ -1,7 +1,5 @@
 package de.suchomsky;
 
-import com.fazecast.jSerialComm.SerialPort;
-
 /**
  * Driver3D
  * Copyright (c) 2017 Dennis Suchomsky <dennis.suchomsky@gmail.com>
@@ -19,29 +17,6 @@ import com.fazecast.jSerialComm.SerialPort;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class Driver3D {
+public class GcodeFile {
 
-	private static Driver3D driver3D = null;
-	private SerialPort[] serialPorts = null;
-
-	private Driver3D() {
-		driver3D = this;
-		probePorts();
-	}
-
-	public static Driver3D getInstance() {
-		if (driver3D == null)
-			driver3D = new Driver3D();
-		return driver3D;
-	}
-
-	public SerialPort[] getSerialPorts() {
-		return serialPorts;
-	}
-
-	private void probePorts() {
-		serialPorts = SerialPort.getCommPorts();
-	}
-	
 }
-
