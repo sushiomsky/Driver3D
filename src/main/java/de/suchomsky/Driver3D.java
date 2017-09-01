@@ -1,5 +1,11 @@
 package de.suchomsky;
 
+import com.fazecast.jSerialComm.SerialPort;
+import com.fazecast.jSerialComm.SerialPortEvent;
+import com.fazecast.jSerialComm.SerialPortPacketListener;
+
+import java.io.UnsupportedEncodingException;
+
 /**
  * Driver3D
  * Copyright (c) 2017 Dennis Suchomsky <dennis.suchomsky@gmail.com>

@@ -1,7 +1,5 @@
 package de.suchomsky;
 
-import com.fazecast.jSerialComm.SerialPort;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -25,13 +23,17 @@ import java.io.IOException;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 public class Printer {
-	private SerialPort serialPort;
+	private PrinterConnection printerConnection;
 
-	Printer(SerialPort serialPort) {
-		this.serialPort = serialPort;
+	Printer(PrinterConnection printerConnection) {
+		this.printerConnection = printerConnection;
 	}
 
-	protected void sendCommand(String command){}
+	public VersionCommandResponse getFirmwareVersion(){
+		return new VersionCommandResponse();
+	}
+
+	protected void sendCommand(PrinterCommand printerCommand){}
 
 	public void startPrint(){}
 
@@ -43,18 +45,18 @@ public class Printer {
 	public void transferToSd(File localeFile) throws IOException {
 		//get filename
 		//send M28 filename command
-		sendCommand("M28 " + localeFile.getName());
+		sendCommand(new PrinterCommand("M28 " + localeFile.getName()));
 		BufferedReader bufferedReader = new BufferedReader(new FileReader(localeFile));
 		String line = null;
 		try {
 			while (!(line = bufferedReader.readLine()).isEmpty()){
-				sendCommand(line);
+				sendCommand(new PrinterCommand(line));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		finally {
-			sendCommand("M29 ");
+			sendCommand(new PrinterCommand("M29 "));
 		}
 	}
 

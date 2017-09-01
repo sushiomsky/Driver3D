@@ -1,7 +1,5 @@
 package de.suchomsky;
 
-import com.fazecast.jSerialComm.SerialPort;
-
 /**
  * driver3d
  * Copyright (c) 2017 Dennis Suchomsky <dennis.suchomsky@gmail.com>
@@ -19,22 +17,5 @@ import com.fazecast.jSerialComm.SerialPort;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class SerialConnection implements PrinterConnection {
-	public SerialConnection(SerialPort serialPort){
-
-	}
-	@Override
-	public boolean isConnected() {
-		return false;
-	}
-
-	@Override
-	public boolean connect() {
-		return false;
-	}
-
-	@Override
-	public void send(PrinterCommand printerCommand) {
-
-	}
+public class CommandResponse {
 }

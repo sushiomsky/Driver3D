@@ -18,4 +18,9 @@ package de.suchomsky;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 public class PrinterCommand {
+	private String commandString;
+
+	PrinterCommand(String commandString){
+		this.commandString = commandString;
+	}
 }
