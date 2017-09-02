@@ -35,6 +35,7 @@ public class Driver3D {
 		//start print
 
 		SerialPort[] comPorts = SerialPort.getCommPorts();
+		Printer printer = new Printer(new SerialConnection(SerialPort.getCommPort(args[2])));
 /*
 		for(SerialPort comPort: comPorts) {
 			System.out.println(comPort.getDescriptivePortName() + " " + comPort.getSystemPortName());

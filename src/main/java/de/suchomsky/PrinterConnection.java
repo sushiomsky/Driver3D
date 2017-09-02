@@ -19,6 +19,6 @@ package de.suchomsky;
  */
 public interface PrinterConnection {
 	public boolean isConnected();
-	public boolean connect();
+	public void connect();
 	public void send(PrinterCommand printerCommand);
 }

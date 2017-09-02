@@ -20,17 +20,22 @@ import com.fazecast.jSerialComm.SerialPort;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 public class SerialConnection implements PrinterConnection {
-	public SerialConnection(SerialPort serialPort){
+	private boolean connected = false;
+	private SerialPort serialPort;
 
+	public SerialConnection(SerialPort serialPort){
+		this.serialPort = serialPort;
+		connect();
 	}
 	@Override
 	public boolean isConnected() {
-		return false;
+		return connected;
 	}
 
 	@Override
-	public boolean connect() {
-		return false;
+	public void connect() {
+		if(serialPort.openPort())
+			connected = true;
 	}
 
 	@Override
