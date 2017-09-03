@@ -1,7 +1,9 @@
-package de.suchomsky;
+package de.suchomsky.commands;
+
+import de.suchomsky.PrinterCommand;
 
 /**
- * driver3d
+ * Driver3D
  * Copyright (c) 2017 Dennis Suchomsky <dennis.suchomsky@gmail.com>
  * <p>
  * This program is free software: you can redistribute it and/or modify
@@ -17,8 +19,9 @@ package de.suchomsky;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-public interface PrinterCommand {
-
-	String getCommandString();
-
+public class M28TransferToSd implements PrinterCommand {
+	@Override
+	public String getCommandString() {
+		return null;
+	}
 }
