@@ -2,6 +2,7 @@ package de.suchomsky;
 
 import com.fazecast.jSerialComm.SerialPort;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -34,6 +35,7 @@ public class SerialConnection implements PrinterConnection {
 	public SerialConnection(SerialPort serialPort){
 		this.serialPort = serialPort;
 		connect();
+		this.serialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 100, 0);
 		inputStreamReader = new InputStreamReader(serialPort.getInputStream());
 		outputStreamWriter = new OutputStreamWriter(serialPort.getOutputStream());
 	}
@@ -52,6 +54,11 @@ public class SerialConnection implements PrinterConnection {
 	@Override
 	public void send(PrinterCommand printerCommand) throws IOException {
 		outputStreamWriter.write(printerCommand.toString());
+	}
+
+	@Override
+	public String recieve() throws IOException {
+		return new BufferedReader(inputStreamReader).readLine();
 	}
 
 	@Override

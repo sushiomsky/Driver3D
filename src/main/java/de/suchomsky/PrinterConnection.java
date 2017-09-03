@@ -27,4 +27,6 @@ public interface PrinterConnection {
 	void close() throws IOException;
 
 	void send(PrinterCommand printerCommand) throws IOException;
+
+	String recieve() throws IOException;
 }
