@@ -3,7 +3,7 @@ package de.suchomsky;
 import com.fazecast.jSerialComm.SerialPort;
 
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 
@@ -28,15 +28,14 @@ import java.io.OutputStreamWriter;
 public class SerialConnection implements PrinterConnection {
 	private boolean connected = false;
 	private SerialPort serialPort;
-	private OutputStream outputStream;
 	private OutputStreamWriter outputStreamWriter;
+	private InputStreamReader inputStreamReader;
 
 	public SerialConnection(SerialPort serialPort){
 		this.serialPort = serialPort;
 		connect();
-		outputStream = serialPort.getOutputStream();
-		outputStreamWriter = new OutputStreamWriter(outputStream);
-
+		inputStreamReader = new InputStreamReader(serialPort.getInputStream());
+		outputStreamWriter = new OutputStreamWriter(serialPort.getOutputStream());
 	}
 
 	@Override
@@ -53,5 +52,12 @@ public class SerialConnection implements PrinterConnection {
 	@Override
 	public void send(PrinterCommand printerCommand) throws IOException {
 		outputStreamWriter.write(printerCommand.toString());
+	}
+
+	@Override
+	public void close() throws IOException {
+		outputStreamWriter.close();
+		inputStreamReader.close();
+		serialPort.closePort();
 	}
 }
