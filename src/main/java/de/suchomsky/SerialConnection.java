@@ -24,6 +24,7 @@ import java.io.OutputStreamWriter;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 public class SerialConnection implements PrinterConnection {
 	private boolean connected = false;
 	private SerialPort serialPort;

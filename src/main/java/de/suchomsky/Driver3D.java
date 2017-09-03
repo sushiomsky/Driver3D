@@ -1,12 +1,9 @@
 package de.suchomsky;
 
 import com.fazecast.jSerialComm.SerialPort;
-import com.fazecast.jSerialComm.SerialPortEvent;
-import com.fazecast.jSerialComm.SerialPortPacketListener;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 /**
  * Driver3D
@@ -34,7 +31,6 @@ public class Driver3D {
 		if (!(f.exists() && !f.isDirectory()))
 			printUsage();
 
-		SerialPort[] comPorts = SerialPort.getCommPorts();
 		Printer printer = new Printer(new SerialConnection(SerialPort.getCommPort(args[2])));
 
 		if (!printer.isConnected())
@@ -46,112 +42,11 @@ public class Driver3D {
 			e.printStackTrace();
 		}
 
-		printer.printFromSd(f.getName());
-
-/*
-		for(SerialPort comPort: comPorts) {
-			System.out.println(comPort.getDescriptivePortName() + " " + comPort.getSystemPortName());
-			comPort.openPort();
-			comPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 20, 0);
-			InputStream in = comPort.getInputStream();
-			try {
-				for (int j = 0; j < 1000; ++j)
-					System.out.print((char) in.read());
-				in.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			comPort.closePort();
+		try {
+			printer.printFromSd(f.getName());
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-*/
-		while (true) {
-			comPorts = SerialPort.getCommPorts();
-			for (SerialPort comPort : comPorts) {
-
-				System.out.println(comPort.getDescriptivePortName() + " " + comPort.getSystemPortName());
-				if (comPort.openPort()) {
-					comPort.addDataListener(new SerialPortPacketListener() {
-						@Override
-						public int getPacketSize() {
-							return 0;
-						}
-
-						@Override
-						public int getListeningEvents() {
-							return 0;
-						}
-
-						@Override
-						public void serialEvent(SerialPortEvent event) {
-							SerialPort serialPort = event.getSerialPort();
-							int bytesAvailable = serialPort.bytesAvailable();
-
-							if (serialPort.bytesAvailable() > 0) {
-								byte[] byteBuffer = new byte[serialPort.bytesAvailable()];
-								serialPort.readBytes(byteBuffer, byteBuffer.length);
-								try {
-									System.out.println(new String(byteBuffer,"UTF-8"));
-								} catch (UnsupportedEncodingException e) {
-									e.printStackTrace();
-								}
-							}
-							if (event.getEventType() == SerialPort.LISTENING_EVENT_DATA_RECEIVED) {
-							}
-							if (event.getEventType() == SerialPort.LISTENING_EVENT_DATA_AVAILABLE) {
-							}
-						}
-					});
-				}
-			}
-		}
-				/*
-				if (comPort.openPort()) {
-					try {
-						if (comPort.bytesAvailable() == 0) {
-							Thread.sleep(3000);
-						}else {
-							byte[] readBuffer = new byte[comPort.bytesAvailable()];
-							int numRead = comPort.readBytes(readBuffer, readBuffer.length);
-							System.out.println("Read " + numRead + " bytes.");
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					comPort.closePort();
-				}
-			}
-		}
-		//play a song
-		/**
-		 * M300 - Play Tone
-		 lcd  Play a single tone, buzz, or beep. SPEAKER
-		 Add a tone to the tone queue.
-
-		 Usage
-		 M300 [P<ms>] [S<Hz>]
-		 Argument	Description
-		 [P<ms>]
-		 Duration (1s)
-
-		 [S<Hz>]
-		 Frequency (260Hz)
-
-		 Notes
-		 Requires SPEAKER to play tones (not just beeps).
-
-		 In Marlin 1.0.2, playing tones block the command queue. Marlin 1.1.0 uses a tone queue and background tone player to keep the command buffer from being blocked by playing tones.
-
-		 Examples
-		 Play a tune.
-
-		 M300 S440 P200
-		 M300 S660 P250
-		 M300 S880 P300
-		 */
-		/**
-		 *M666
-		 */
-
 	}
 
 	public static void printUsage() {
