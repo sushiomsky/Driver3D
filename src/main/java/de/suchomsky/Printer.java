@@ -33,8 +33,6 @@ public class Printer {
 		printerConnection.send(printerCommand);
 	}
 
-	public void startPrint(){}
-
 	String[] listSdFiles() {
 		String[] gcodeFiles = null;
 		return gcodeFiles;
@@ -59,8 +57,7 @@ public class Printer {
 	}
 
 	void printFromSd(String filename) throws IOException {
-		sendCommand(new PrinterCommand("M23 " + filename));
-		sendCommand(new PrinterCommand("M24 "));
+		sendCommand(new PrinterCommand("M32 " + filename));
 	}
 
 	boolean isConnected() {

@@ -36,6 +36,7 @@ public class SerialConnection implements PrinterConnection {
 		connect();
 		outputStream = serialPort.getOutputStream();
 		outputStreamWriter = new OutputStreamWriter(outputStream);
+
 	}
 
 	@Override
