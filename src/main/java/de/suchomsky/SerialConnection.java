@@ -2,6 +2,11 @@ package de.suchomsky;
 
 import com.fazecast.jSerialComm.SerialPort;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+
+
 /**
  * driver3d
  * Copyright (c) 2017 Dennis Suchomsky <dennis.suchomsky@gmail.com>
@@ -22,11 +27,16 @@ import com.fazecast.jSerialComm.SerialPort;
 public class SerialConnection implements PrinterConnection {
 	private boolean connected = false;
 	private SerialPort serialPort;
+	private OutputStream outputStream;
+	private OutputStreamWriter outputStreamWriter;
 
 	public SerialConnection(SerialPort serialPort){
 		this.serialPort = serialPort;
 		connect();
+		outputStream = serialPort.getOutputStream();
+		outputStreamWriter = new OutputStreamWriter(outputStream);
 	}
+
 	@Override
 	public boolean isConnected() {
 		return connected;
@@ -39,7 +49,7 @@ public class SerialConnection implements PrinterConnection {
 	}
 
 	@Override
-	public void send(PrinterCommand printerCommand) {
-
+	public void send(PrinterCommand printerCommand) throws IOException {
+		outputStreamWriter.write(printerCommand.toString());
 	}
 }

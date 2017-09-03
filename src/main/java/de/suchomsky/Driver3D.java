@@ -4,6 +4,8 @@ import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortEvent;
 import com.fazecast.jSerialComm.SerialPortPacketListener;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -26,16 +28,26 @@ import java.io.UnsupportedEncodingException;
 public class Driver3D {
 	public static void main(String[] args){
 		if (args.length != 2)
-			System.out.println("Usage: driver3d filename.gco /dev/ttyAMC*");
+			printUsage();
 
-		//probe serial port
-		//get printer frmware version
-		//if known start file transfer
-		//transfer local file to SD card
-		//start print
+		File f = new File(args[1]);
+		if (!(f.exists() && !f.isDirectory()))
+			printUsage();
 
 		SerialPort[] comPorts = SerialPort.getCommPorts();
 		Printer printer = new Printer(new SerialConnection(SerialPort.getCommPort(args[2])));
+
+		if (!printer.isConnected())
+			printComError();
+
+		try {
+			printer.transferToSd(f);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		printer.printFromSd(f.getName());
+
 /*
 		for(SerialPort comPort: comPorts) {
 			System.out.println(comPort.getDescriptivePortName() + " " + comPort.getSystemPortName());
@@ -140,6 +152,14 @@ public class Driver3D {
 		 *M666
 		 */
 
+	}
+
+	public static void printUsage() {
+		System.out.println("Usage: driver3d filename.gco /dev/ttyAMC*");
+	}
+
+	public static void printComError() {
+		System.out.println("Error opening com port");
 	}
 }
 

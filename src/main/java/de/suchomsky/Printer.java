@@ -29,11 +29,9 @@ public class Printer {
 		this.printerConnection = printerConnection;
 	}
 
-	public VersionCommandResponse getFirmwareVersion(){
-		return new VersionCommandResponse();
+	protected void sendCommand(PrinterCommand printerCommand) throws IOException {
+		printerConnection.send(printerCommand);
 	}
-
-	protected void sendCommand(PrinterCommand printerCommand){}
 
 	public void startPrint(){}
 
@@ -60,7 +58,12 @@ public class Printer {
 		}
 	}
 
-	void printFromSd(String filename) {
+	void printFromSd(String filename) throws IOException {
+		sendCommand(new PrinterCommand("M23 " + filename));
+		sendCommand(new PrinterCommand("M24 "));
+	}
 
+	boolean isConnected() {
+		return printerConnection.isConnected();
 	}
 }

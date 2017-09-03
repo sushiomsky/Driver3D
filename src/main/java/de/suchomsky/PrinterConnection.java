@@ -1,5 +1,7 @@
 package de.suchomsky;
 
+import java.io.IOException;
+
 /**
  * driver3d
  * Copyright (c) 2017 Dennis Suchomsky <dennis.suchomsky@gmail.com>
@@ -18,7 +20,9 @@ package de.suchomsky;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 public interface PrinterConnection {
-	public boolean isConnected();
-	public void connect();
-	public void send(PrinterCommand printerCommand);
+	boolean isConnected();
+
+	void connect();
+
+	void send(PrinterCommand printerCommand) throws IOException;
 }
